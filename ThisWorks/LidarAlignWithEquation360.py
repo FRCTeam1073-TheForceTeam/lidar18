@@ -1,5 +1,7 @@
 import time
 import sys
+import math
+import traceback
 
 from rplidar import RPLidar
 from networktables import NetworkTables
@@ -24,7 +26,7 @@ sd = NetworkTables.getTable("LidarSendTable")
 print ("1073 Lidar Prototype ")
 
 
-def run(path):
+def LidarAlign360(path):
     '''Main function'''
     loop = False
     Inches = None
@@ -117,10 +119,14 @@ def run(path):
                
     except KeyboardInterrupt:
         print('Stopping.')
+    except:
+        traceback.print_exc()
+        
     lidar.stop_motor()
     lidar.stop()
     lidar.disconnect()
     outfile.close()
 
 if __name__ == '__main__':
-    run(sys.argv[1])
+    LidarAlign360(sys.argv[1])
+    sd.AddTableListener(LidarAlign360)
