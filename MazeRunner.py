@@ -35,6 +35,11 @@ def run(path):
     PORT_NAME = '/dev/ttyUSB0'
     lidar = RPLidar(PORT_NAME)
     outfile = open(path, 'w')
+    #ZeroBlocked = False
+    #NinetyBlocked= False
+    #OneEightyBlocked = False
+    #TwoSeventyBlocked = False
+    
     try:
         print('Recording measures... Press Crl+C to stop.')
         for measurment in lidar.iter_measures():
@@ -99,6 +104,8 @@ def run(path):
                        else:
                             left = 0.5
                             right = 0.5
+
+                        #if degrees >= 
                        sd.putNumber("left", left)
                        sd.putNumber("right", right)
                        print ("lidarDegrees", lidarDegrees)
